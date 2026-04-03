@@ -2,6 +2,10 @@ dependencies = [glad, glfw, opengl]
 
 chapters = [
     '2_3_helloWindow',
+    '2_4_helloTriangle',
+    '2_4_helloTriangle_e1',
+    '2_4_helloTriangle_e2',
+    '2_4_helloTriangle_e3',
 ]
 
 foreach chapter : chapters
