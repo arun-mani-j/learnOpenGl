@@ -63,7 +63,8 @@ void checkProgramStatus(GLuint program, GLenum pname) {
 }
 
 // NOLINTBEGIN(bugprone-easily-swappable-parameters)
-void createVertexArrayObject(GLuint *vertexArrayObj, GLuint *vertexBufferObj,
+void createVertexArrayObject(GLuint *vertexArrayObj,
+                             GLuint *vertexBufferObj,
                              std::span<float> vertices) {
   // NOLINTEND(bugprone-easily-swappable-parameters)
   glGenVertexArrays(1, vertexArrayObj);
@@ -72,7 +73,9 @@ void createVertexArrayObject(GLuint *vertexArrayObj, GLuint *vertexBufferObj,
   glBindVertexArray(*vertexArrayObj);
 
   glBindBuffer(GL_ARRAY_BUFFER, *vertexBufferObj);
-  glBufferData(GL_ARRAY_BUFFER, static_cast<long>(vertices.size_bytes()), vertices.data(),
+  glBufferData(GL_ARRAY_BUFFER,
+               static_cast<long>(vertices.size_bytes()),
+               vertices.data(),
                GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(vertices[0]), nullptr);
@@ -141,7 +144,8 @@ auto main() -> int {
 
   // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
   createVertexArrayObject(vertexArrayObjs.data(), vertexBufferObjs.data(), std::span(vertices));
-  createVertexArrayObject(&vertexArrayObjs[1], &vertexBufferObjs[1],
+  createVertexArrayObject(&vertexArrayObjs[1],
+                          &vertexBufferObjs[1],
                           std::span(vertices).subspan(9));
   // NOLINTEND(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
 

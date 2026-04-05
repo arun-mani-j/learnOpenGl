@@ -124,7 +124,9 @@ auto main() -> int {
   glBindVertexArray(vertexArrayObj);
 
   glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObj);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), vertices.data(),
+  glBufferData(GL_ARRAY_BUFFER,
+               vertices.size() * sizeof(vertices[0]),
+               vertices.data(),
                GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(vertices[0]), nullptr);

@@ -129,11 +129,15 @@ auto main() -> int {
   glBindVertexArray(vertexArrayObj);
 
   glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObj);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), vertices.data(),
+  glBufferData(GL_ARRAY_BUFFER,
+               vertices.size() * sizeof(vertices[0]),
+               vertices.data(),
                GL_STATIC_DRAW);
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObj);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(indices[0]), indices.data(),
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+               indices.size() * sizeof(indices[0]),
+               indices.data(),
                GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(vertices[0]), nullptr);
