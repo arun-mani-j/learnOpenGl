@@ -40,7 +40,7 @@ void main() {
 }
 )";
 
-void checkSuccess(GLuint shader, GLenum pname) {
+void checkShaderStatus(GLuint shader, GLenum pname) {
   int success;
   char buf[512];
 
@@ -49,6 +49,18 @@ void checkSuccess(GLuint shader, GLenum pname) {
     return;
 
   glGetShaderInfoLog(shader, sizeof(buf), NULL, buf);
+  std::cerr << "Error:\n" << buf << std::endl;
+}
+
+void checkProgramStatus(GLuint program, GLenum pname) {
+  int success;
+  char buf[512];
+
+  glGetProgramiv(program, pname, &success);
+  if (success)
+    return;
+
+  glGetProgramInfoLog(program, sizeof(buf), NULL, buf);
   std::cerr << "Error:\n" << buf << std::endl;
 }
 
@@ -74,18 +86,18 @@ void createShaderProgram(GLuint *shaderProgram, const char *fragmentShaderSource
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
   glCompileShader(vertexShader);
-  checkSuccess(vertexShader, GL_COMPILE_STATUS);
+  checkShaderStatus(vertexShader, GL_COMPILE_STATUS);
 
   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
   glCompileShader(fragmentShader);
-  checkSuccess(fragmentShader, GL_COMPILE_STATUS);
+  checkShaderStatus(fragmentShader, GL_COMPILE_STATUS);
 
   *shaderProgram = glCreateProgram();
   glAttachShader(*shaderProgram, vertexShader);
   glAttachShader(*shaderProgram, fragmentShader);
   glLinkProgram(*shaderProgram);
-  checkSuccess(*shaderProgram, GL_LINK_STATUS);
+  checkProgramStatus(*shaderProgram, GL_LINK_STATUS);
 
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
