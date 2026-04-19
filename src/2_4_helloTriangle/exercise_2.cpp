@@ -43,7 +43,7 @@ void checkShaderStatus(GLuint shader, GLenum pname) {
   std::vector<char> info(length);
 
   glGetShaderInfoLog(shader, length, nullptr, info.data());
-  std::println(stderr, "Error:\n{}", info);
+  std::println(stderr, "Error:\n{}", std::string_view(info.data(), info.size()));
 }
 
 void checkProgramStatus(GLuint program, GLenum pname) {
@@ -59,7 +59,7 @@ void checkProgramStatus(GLuint program, GLenum pname) {
   std::vector<char> info(length);
 
   glGetProgramInfoLog(program, length, nullptr, info.data());
-  std::println(stderr, "Error:\n{}", info);
+  std::println(stderr, "Error:\n{}", std::string_view(info.data(), info.size()));
 }
 
 // NOLINTBEGIN(bugprone-easily-swappable-parameters)
